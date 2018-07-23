@@ -9,6 +9,7 @@
 
 library(shiny)
 library(ggplot2)
+library(timevis)
 
 
 # Define UI for application that draws a histogram
@@ -26,6 +27,21 @@ shinyUI(navbarPage("Spotify Data Stats",
     )
   )
 )
+), tabPanel("Statistics",
+         fluidPage(
+           titlePanel("Statistics"),
+           helpText("Some basic facts about your listening history"),
+           sidebarLayout(
+             sidebarPanel(
+             ),
+             mainPanel(
+               
+             )
+           )
+           
+           
+           
+         )
 ), tabPanel("Data exploration",
             fluidPage(
               titlePanel("Data exploration"),

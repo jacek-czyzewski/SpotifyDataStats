@@ -8,7 +8,6 @@
 #
 
 library(shiny)
-# library(shinyBS)
 library(jsonlite)
 library(ggplot2)
 library(timevis)
