@@ -10,6 +10,7 @@
 library(shiny)
 library(ggplot2)
 library(timevis)
+library(DT)
 
 
 # Define UI for application that draws a histogram
@@ -23,7 +24,7 @@ shinyUI(navbarPage("Spotify Data Stats",
                 accept=c("json"))
     ),
     mainPanel(
-      tableOutput('contents')
+      DTOutput('contents')
     )
   )
 )
@@ -92,7 +93,7 @@ shinyUI(navbarPage("Spotify Data Stats",
                   
                   mainPanel(
                     tabsetPanel(
-                      tabPanel("Data", tableOutput("timeline1")),
+                      tabPanel("Data", DTOutput("timeline1")),
                       tabPanel("Timeline", timevisOutput("timeline2"))
                     )
                   )
