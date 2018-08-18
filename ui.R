@@ -21,7 +21,7 @@ shinyUI(navbarPage("Spotify Data Stats",
   sidebarLayout(
     sidebarPanel(
       fileInput('file1', 'Choose SpotifyHistory.json file',
-                accept=c("json"))
+                accept=c("json"), placeholder = "No file selected - using default data")
     ),
     mainPanel(
       DTOutput('contents')
@@ -94,6 +94,7 @@ shinyUI(navbarPage("Spotify Data Stats",
                   mainPanel(
                     tabsetPanel(
                       tabPanel("Data", DTOutput("timeline1")),
+                      tabPanel("Activity chart", plotOutput("timeline3")),
                       tabPanel("Timeline", timevisOutput("timeline2"))
                     )
                   )

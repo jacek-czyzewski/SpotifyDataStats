@@ -17,7 +17,10 @@ library(DT)
 shinyServer(function(input, output) {
   myData <- reactive({
     inFile <- input$file1
-    if (is.null(inFile)){ return(NULL)}else{
+    if (is.null(inFile)){ data <- fromJSON(txt="StreamingHistory.json")
+    data[,1] <- sub(',.*$','', data[,1])  
+    data
+    }else{
     data <- fromJSON(txt=inFile$datapath)
     data[,1] <- sub(',.*$','', data[,1])  
     data}
@@ -84,6 +87,19 @@ shinyServer(function(input, output) {
       end     = c(rep(NA, times=length(data_band$time)))
     )
     timevis(data_timeline)
+    
+    
+  })
+  
+  # interactive activity plot, highlighting and showing top 3 bands when scrolled over
+  
+  output$timeline3 <- renderPlot({
+    dataAll <- myData()
+    dataAll[,3] <- sub(' .*$','', dataAll[,3])
+    data.act <- as.data.frame(table(dataAll[,3]))
+    data.act[,1] <- as.Date(data.act[,1])
+    plot.activity2 <- ggplot(data.act, aes(x=Var1, y = Freq)) + geom_segment(aes(x=Var1, xend = Var1, y = 0, yend=Freq)) + geom_point(size=1, color="lightblue", fill=alpha("grey", 0.3), alpha=0.7, shape=21, stroke=2)
+    plot.activity2
     
     
   })
